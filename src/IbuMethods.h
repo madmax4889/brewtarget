@@ -41,6 +41,8 @@ public:
     * \param minutes - minutes that the hops are in the boil
     */
    static double getIbus(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes);
+
+   static double getAromaIbus(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes);
 private:
    static double tinseth(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes);
    static double rager(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes);

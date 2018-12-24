@@ -450,6 +450,8 @@ void OptionDialog::saveAndClose()
 
    Brewtarget::setOption("mashHopAdjustment", ibuAdjustmentMashHopDoubleSpinBox->value() / 100);
    Brewtarget::setOption("firstWortHopAdjustment", ibuAdjustmentFirstWortDoubleSpinBox->value() / 100);
+   Brewtarget::setOption("koHopCoefficient", ibuKOHopCoeffDoubleSpinBox->value());
+   Brewtarget::setOption("koHopUtilAtZero", ibuKOHopUtilAZeroDoubleSpinBox->value());
 
    // Make sure the main window updates.
    if( Brewtarget::mainWindow() )
@@ -496,6 +498,12 @@ void OptionDialog::showChanges()
 
    amt = Brewtarget::toDouble(Brewtarget::option("firstWortHopAdjustment",1.1).toString(), "OptionDialog::showChanges()");
    ibuAdjustmentFirstWortDoubleSpinBox->setValue(amt*100);
+
+   amt = Brewtarget::toDouble(Brewtarget::option("koHopCoefficient", 0).toString(), "OptionDialog::showChanges()");
+   ibuKOHopCoeffDoubleSpinBox->setValue(amt);
+
+   amt = Brewtarget::toDouble(Brewtarget::option("koHopUtilAtZero", 0).toString(), "OptionDiaglog::showChanges()");
+   ibuKOHopUtilAZeroDoubleSpinBox->setValue(amt);
 
    // Database stuff -- this looks weird, but trust me. We want SQLITE to be
    // the default for this field
