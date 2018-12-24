@@ -52,6 +52,23 @@ double IbuMethods::getIbus(double AArating, double hops_grams, double finalVolum
    }
 }
 
+double IbuMethods::getAromaIbus(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes)
+{
+    // We use a parabola to provide a decent approximation of the utilization, especially given
+    // that steeping periods are relatively small (compared to t=infinity)
+    // The formula we use is u = a * sqrt(t) + k, where:
+    // - u is the utilization, in percent (i.e. what we are solving for)
+    // - t is the time, in minutes, for which the hops are being steeped
+    // - k, provided in the options, is the utilization for hops steeped for 0 minutes. k must be non-negative, and;
+    // - a, provided in the options, is the coefficient used to adjust how narrow the parabola is. a must be non-negative.
+    const double knockoutHopCoeff = Brewtarget::toDouble(Brewtarget::option("koHopCoefficient", 0).toString(), "Recipe::ibmFromHop()");
+    const double knockoutHopUtilAtZero = Brewtarget::toDouble(Brewtarget::option("koHopUtilAtZero", 0).toString(), "Recipe::imbFromHop()");
+
+    const double knockoutHopUtilization = (knockoutHopCoeff * sqrt(minutes)) + knockoutHopUtilAtZero;
+
+    return hops_grams * AArating * knockoutHopUtilization * (10 / finalVolume_liters);
+}
+
 // These are collected from http://www.realbeer.com/hops/FAQ.html
 
 double IbuMethods::tinseth(double AArating, double hops_grams, double finalVolume_liters, double wort_grav, double minutes)
