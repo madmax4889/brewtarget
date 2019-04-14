@@ -51,7 +51,7 @@ public:
    //! \brief The type of hop, meaning for what properties it is used.
    enum Type {Bittering, Aroma, Both};
    //! \brief The form of the hop.
-   enum Form {Leaf, Pellet, Plug};
+   enum Form {Leaf, Pellet, Plug, Resin};
    //! \brief The way the hop is used.
    enum Use {Mash, First_Wort, Boil, UseAroma, Dry_Hop, Primary_Dry_Hop }; // NOTE: way bad. We have a duplicate enum (Aroma), and BeerXML expects a space for "Dry Hop" and "First Wort". Damn. Damn damn.
    Q_ENUMS( Type Form Use )

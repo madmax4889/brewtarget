@@ -588,6 +588,7 @@ QWidget* HopItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewIt
       box->addItem(tr("Leaf"));
       box->addItem(tr("Pellet"));
       box->addItem(tr("Plug"));
+      box->addItem(tr("Resin"));
       box->setMinimumWidth(box->minimumSizeHint().width());
       box->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
