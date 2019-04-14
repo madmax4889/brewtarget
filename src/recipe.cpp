@@ -368,6 +368,8 @@ QVector<PreInstruction> Recipe::hopSteps(Hop::Use type)
             str = tr("Put %1 %2 into mash for %3.");
          else if( type == Hop::UseAroma )
             str = tr("Steep %1 %2 in wort for %3.");
+         else if( type == Hop::Primary_Dry_Hop )
+            str = tr("Put %1 %2 into mesh bag and into primary fermenter for %3");
          else
          {
             Brewtarget::logW("Recipe::hopSteps(): Unrecognized hop use.");
@@ -777,6 +779,10 @@ void Recipe::generateInstructions()
    ins->setName(tr("Pitch yeast"));
    ins->setDirections(str);
    /*** End primary yeast ***/
+
+   preinstructions.clear();
+   preinstructions += hopSteps(Hop::Primary_Dry_Hop);
+   addPreinstructions(preinstructions);
 
    /*** Primary misc ***/
    addPreinstructions(miscSteps(Misc::Primary));
