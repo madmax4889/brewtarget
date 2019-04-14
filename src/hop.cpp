@@ -63,7 +63,7 @@ const QString kCohumuloneProp("cohumulone_pct");
 const QString kMyrceneProp("myrcene_pct");
 
 QStringList Hop::types = QStringList() << "Bittering" << "Aroma" << "Both";
-QStringList Hop::forms = QStringList() << "Leaf" << "Pellet" << "Plug";
+QStringList Hop::forms = QStringList() << "Leaf" << "Pellet" << "Plug" << "Resin";
 QStringList Hop::uses = QStringList() << "Mash" << "First Wort" << "Boil" << "Aroma" << "Dry Hop";
 QHash<QString,QString> Hop::tagToProp = Hop::tagToPropHash();
 
@@ -408,7 +408,7 @@ const QString Hop::typeStringTr() const
 
 const QString Hop::formStringTr() const
 {
-   static QStringList formsTr = QStringList() << tr("Leaf") << tr("Pellet") << tr("Plug");
+   static QStringList formsTr = QStringList() << tr("Leaf") << tr("Pellet") << tr("Plug") << tr("Resin");
    return formsTr.at(form());
 }
 

@@ -36,6 +36,7 @@ HopEditor::HopEditor( QWidget* parent )
    
    connect( buttonBox, &QDialogButtonBox::accepted, this, &HopEditor::save);
    connect( buttonBox, &QDialogButtonBox::rejected, this, &HopEditor::clearAndClose);
+   connect( comboBox_form, SIGNAL(currentIndexChanged(int)), this, SLOT(hopFormChange(int)) );
 }
 
 void HopEditor::setHop( Hop* h )
@@ -203,3 +204,16 @@ void HopEditor::showChanges(QMetaProperty* prop)
          return;
    }
 }
+
+void HopEditor::hopFormChange(int index)
+{
+   if( index == Hop::Resin )
+   {
+      lineEdit_alpha->setText(100);
+      if( lineEdit_alpha->isEnabled() )
+         lineEdit_alpha->setEnabled(false);
+   }
+   else
+      lineEdit_alpha->setEnabled(true);
+}
+

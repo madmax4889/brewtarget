@@ -53,6 +53,7 @@ public slots:
    //! Clear the dialog and close it.
    void clearAndClose();
    void changed(QMetaProperty,QVariant);
+   void hopFormChange(int index);
 
 private:
    Hop* obsHop;
