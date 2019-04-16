@@ -1932,29 +1932,14 @@ double Recipe::ibuFromHop(Hop const* hop)
       boilTime = equip->boilTime_min();
    }
  
-   if( hop->form() == Hop::Resin ) {
-      // Assuming that alpha acid concentration is 100% in resin case
-      // Linear interpolation using the following (mins,IBU) points
-      // (0, 1.6), and;
-      // (60, 11)
-      // ... and stable at 11IBU for > 60 mins
-      // Using 1 g = 1 mL
-      double tempMins = std::min( minutes, 60.0 );
-      double ibuRange = 11 - 1.6;
-      double timeProportion = tempMins / 60.0;
-      ibus = (timeProportion * ibuRange + 1.6) * grams;
-   }
-   else
-   {
-      if( hop->use() == Hop::Boil)
-         ibus = IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, minutes );
-      else if( hop->use() == Hop::First_Wort )
-         ibus = fwhAdjust * IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, boilTime );
-      else if( hop->use() == Hop::Mash && mashHopAdjust > 0.0 )
-         ibus = mashHopAdjust * IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, boilTime );
-      else if( hop->use() == Hop::UseAroma )
-         ibus = IbuMethods::getAromaIbus(AArating, grams, _finalVolumeNoLosses_l, _og, minutes );
-   }
+   if( hop->use() == Hop::Boil)
+      ibus = IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, minutes );
+   else if( hop->use() == Hop::First_Wort )
+      ibus = fwhAdjust * IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, boilTime );
+   else if( hop->use() == Hop::Mash && mashHopAdjust > 0.0 )
+      ibus = mashHopAdjust * IbuMethods::getIbus( AArating, grams, _finalVolumeNoLosses_l, _og, boilTime );
+   else if( hop->use() == Hop::UseAroma )
+      ibus = IbuMethods::getAromaIbus(AArating, grams, _finalVolumeNoLosses_l, _og, minutes );
 
    // Adjust for hop form. Tinseth's table was created from whole cone data,
    // and it seems other formulae are optimized that way as well. So, the
